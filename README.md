@@ -34,4 +34,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Important Security Note
 
-Typically, the .env file would not be included in the GitHub repo. For the purpose of this project, however, I have included this file so that those reviewing the project do not have to manually input the RedCircle API key.
+Typically, the .env file would not be included in the GitHub repo. For the purpose of this project, however, I have included this file so that those reviewing the project do not have to manually input a RedCircle API key.
