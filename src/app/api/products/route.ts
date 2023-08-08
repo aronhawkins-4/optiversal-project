@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { NextResponse, NextRequest } from 'next/server';
 
-interface IParams {
-	query?: string;
-}
-
 export async function GET(request: NextRequest) {
 	try {
 		const query = request.nextUrl.searchParams;

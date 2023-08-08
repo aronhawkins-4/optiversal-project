@@ -10,6 +10,10 @@ Display the first 9 results in a 3 x 3 grid below the search box. For each produ
 
 ## Getting Started
 
+See [live application](https://optiversal-project.vercel.app) deployed on Vercel:
+
+To run locally:
+
 First, download the dependencies:
 
 ```bash
