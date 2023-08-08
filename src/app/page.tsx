@@ -2,64 +2,68 @@
 
 import axios from 'axios';
 import { ProductCard } from './components/ProductCard';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-
-interface IFormInput {
-	query: string;
-}
+import { useState, useCallback } from 'react';
+import { Form } from './components/Form';
+import { CardLoader } from './components/CardLoader';
+import { Product } from './types/types';
 
 export default function Home() {
-	// const apiKey = process.env.NEXT_PUBLIC_RED_CIRCLE_API_KEY;
-	// const apiUrl = 'https://api.redcircleapi.com/request';
-	const [products, setProducts] = useState();
+	// Product State
+	const [products, setProducts] = useState<Product[] | null>(null);
 
+	// Search Query State
 	const [searchQuery, setSearchQuery] = useState('');
-	const { register, handleSubmit } = useForm<IFormInput>();
-	const onSubmit: SubmitHandler<IFormInput> = (data) => {
-		setSearchQuery('');
-		// const params = {
-		// 	api_key: process.env.NEXT_PUBLIC_RED_CIRCLE_API_KEY,
-		// 	type: 'search',
-		// 	search_term: data.query,
-		// 	sort_by: 'best_seller',
-		// };
-		// axios
-		// 	.get(apiUrl, { params })
-		// 	.then((response) => {
-		// 		console.log(JSON.stringify(response.data.search_results));
-		// 	})
-		// 	.catch((error) => {
-		// 		// catch and print the error
-		// 		console.log(error);
-		// 	});
+
+	// Loading State
+	const [isLoading, setIsLoading] = useState(false);
+
+	// Function to fetch products from Target API
+	const fetchProducts = useCallback((query: string): any => {
+		setIsLoading(true);
 		axios
-			.get(`/api/products/${data.query}`)
+			.get(`/api/products?search_term=${query}`)
 			.then((response) => {
-				console.log(response.data.search_results);
-				setProducts(response.data.search_results);
+				setProducts(response.data);
+				setIsLoading(false);
 			})
 			.catch((error) => {
-				// catch and print the error
-				console.log(error);
+				setProducts([]);
+				setIsLoading(false);
+				alert(error.message);
 			});
-	};
+	}, []);
+
 	return (
-		<main>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<input
-					{...register('query', {
-						onChange: (e) => {
-							setSearchQuery(e.target.value);
-						},
-					})}
-					value={searchQuery}
-					placeholder='Search...'
-					className='text-gray-900'
-				/>
-				<input type='submit' />
-			</form>
-			<div className='grid grid-cols-3'></div>
+		<main className='p-8 md:p-16 lg:p-32 h-full w-full flex flex-col gap-8 items-center'>
+			{/* Search Form */}
+			<Form
+				searchQuery={searchQuery}
+				setSearchQuery={setSearchQuery}
+				setProducts={setProducts}
+				fetchProducts={fetchProducts}
+				disabled={isLoading}
+			/>
+
+			{/* Shown when loading */}
+			{isLoading && <CardLoader />}
+
+			{/* Shown when no results are found */}
+			{products && products.length === 0 && !isLoading && <h2 className='text-xl'>No results.</h2>}
+
+			{/* Shown when results are found */}
+			{products && products.length > 0 && (
+				<div className='grid grid-cols-1 gap-4 w-full lg:grid-cols-3 md:grid-cols-2'>
+					{products.map((product: any) => (
+						<ProductCard
+							key={product.product.tcin}
+							title={product.product.title}
+							imageSrc={product.product.main_image}
+							imageAlt={product.product.title}
+							link={product.product.link}
+						/>
+					))}
+				</div>
+			)}
 		</main>
 	);
 }
