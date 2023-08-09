@@ -34,6 +34,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Important Security Note
+## Important API Note
 
 Typically, the .env file would not be included in the GitHub repo. For the purpose of this project, however, I have included this file so that those reviewing the project do not have to manually input a RedCircle API key.
+If the RedCircle API key provided no longer works, you will need to obtain your own api key and insert it in the .env file as the value of the RED_CIRCLE_API_KEY.
