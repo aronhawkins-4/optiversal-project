@@ -53,7 +53,7 @@ export default function Home() {
 			{/* Shown when results are found */}
 			{products && products.length > 0 && (
 				<div className='grid grid-cols-1 gap-4 w-full lg:grid-cols-3 md:grid-cols-2'>
-					{products.slice(0, 8).map((product: any) => (
+					{products.slice(0, 9).map((product: any) => (
 						<ProductCard
 							key={product.product.tcin}
 							title={product.product.title}
