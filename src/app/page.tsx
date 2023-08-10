@@ -17,7 +17,7 @@ export default function Home() {
 	// Loading State
 	const [isLoading, setIsLoading] = useState(false);
 
-	// Function to fetch products from Target API
+	// Function to fetch products from webscraping API
 	const fetchProducts = useCallback((query: string): any => {
 		setIsLoading(true);
 		axios
@@ -57,7 +57,7 @@ export default function Home() {
 						<ProductCard
 							key={product.title}
 							title={product.title}
-							imageSrc={product.main_image}
+							imageSrc={product.imageSrc}
 							imageAlt={product.imageAlt}
 							link={product.link}
 						/>

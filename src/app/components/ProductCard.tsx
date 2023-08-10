@@ -13,7 +13,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, imageAlt, ti
 	return (
 		// Wrap the entire Component in a Link
 		<Link
-			href={link}
+			href={`https://target.com${link}`}
 			target='_blank'
 			className='bg-gray-800 rounded-xl overflow-hidden group border-slate-400 border'
 		>
