@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## NPM Packages Used
 
--react-hook-form (search form)
--Axios (api calls from client)
--Puppeteer (headless webscraper)
--Cheerio (HTML parsing)
+-   react-hook-form (search form)
+-   Axios (api calls from client)
+-   Puppeteer (headless webscraper)
+-   Cheerio (HTML parsing)
