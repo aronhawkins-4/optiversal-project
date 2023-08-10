@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 		}
 
 		// Open Puppeteer Browser
-		const browser = await puppeteer.launch({ headless: 'new' });
+		const browser = await puppeteer.launch({ headless: false });
 		const page = await browser.newPage();
 		await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 		await page.goto(`https://www.target.com/s?searchTerm=${search_term}`);
