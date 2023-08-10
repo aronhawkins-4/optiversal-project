@@ -55,11 +55,11 @@ export default function Home() {
 				<div className='grid grid-cols-1 gap-4 w-full lg:grid-cols-3 md:grid-cols-2'>
 					{products.slice(0, 9).map((product: any) => (
 						<ProductCard
-							key={product.product.tcin}
-							title={product.product.title}
-							imageSrc={product.product.main_image}
-							imageAlt={product.product.title}
-							link={product.product.link}
+							key={product.title}
+							title={product.title}
+							imageSrc={product.main_image}
+							imageAlt={product.imageAlt}
+							link={product.link}
 						/>
 					))}
 				</div>

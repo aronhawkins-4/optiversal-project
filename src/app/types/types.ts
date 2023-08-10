@@ -1,6 +1,6 @@
 export type Product = {
-	title: string;
-	imageSrc: string;
-	imageAlt: string;
-	link: string;
+	title?: string | undefined;
+	imageSrc?: string | undefined;
+	imageAlt?: string | undefined;
+	link?: string | undefined;
 };
