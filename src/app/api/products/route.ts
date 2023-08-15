@@ -17,8 +17,14 @@ export async function GET(request: NextRequest) {
 		const page = await browser.newPage();
 		await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 		await page.goto(`https://www.target.com/s?searchTerm=${search_term}`);
+		await page.waitForSelector('.styles__StyledCardWrapper-sc-z8946b-0 img');
+		await delay(1000);
 		await page.evaluate(() => {
-			window.scrollBy(0, window.innerHeight * 100);
+			window.scrollBy(0, 3000);
+		});
+		await delay(1000);
+		await page.evaluate(() => {
+			window.scrollBy(0, 3000);
 		});
 		await page.waitForSelector('.ProductRecsWrapper-sc-b7g1ua-0 img', { timeout: 60_000 });
 		const html = await page.evaluate(() => {
@@ -53,4 +59,10 @@ export async function GET(request: NextRequest) {
 		console.log('ERROR_GET_PRODUCTS', error);
 		return new NextResponse('Internal Error', { status: 500 });
 	}
+}
+
+function delay(time: number) {
+	return new Promise(function (resolve) {
+		setTimeout(resolve, time);
+	});
 }
